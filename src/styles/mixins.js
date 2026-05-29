@@ -1,22 +1,24 @@
 import { css } from 'styled-components';
 
 const button = css`
-  color: var(--green);
-  background-color: transparent;
-  border: 1px solid var(--green);
+  color: var(--white);
+  background: rgba(77, 229, 255, 0.1);
+  border: 1px solid rgba(77, 229, 255, 0.45);
   border-radius: var(--border-radius);
   font-size: var(--fz-xs);
   font-family: var(--font-mono);
   line-height: 1;
   text-decoration: none;
-  padding: 1.25rem 1.75rem;
+  padding: 1rem 1.5rem;
   transition: var(--transition);
+  backdrop-filter: blur(10px);
 
   &:hover,
   &:focus-visible {
     outline: none;
-    box-shadow: 4px 4px 0 0 var(--green);
-    transform: translate(-5px, -5px);
+    box-shadow: 0 0 30px rgba(77, 229, 255, 0.25);
+    transform: translateY(-2px);
+    background: rgba(77, 229, 255, 0.16);
   }
   &:after {
     display: none !important;
@@ -75,9 +77,9 @@ const mixins = {
       width: 0;
       height: 1px;
       position: relative;
-      bottom: 0.37em;
+      bottom: 0.3em;
       background-color: var(--green);
-      opacity: 0.5;
+      opacity: 0.6;
       @media (prefers-reduced-motion: no-preference) {
         transition: var(--transition);
       }
@@ -87,11 +89,11 @@ const mixins = {
   button,
 
   smallButton: css`
-    color: var(--green);
-    background-color: transparent;
-    border: 1px solid var(--green);
+    color: var(--white);
+    background: rgba(77, 229, 255, 0.1);
+    border: 1px solid rgba(77, 229, 255, 0.45);
     border-radius: var(--border-radius);
-    padding: 0.75rem 1rem;
+    padding: 0.8rem 1rem;
     font-size: var(--fz-xs);
     font-family: var(--font-mono);
     line-height: 1;
@@ -101,8 +103,8 @@ const mixins = {
     &:hover,
     &:focus-visible {
       outline: none;
-      box-shadow: 3px 3px 0 0 var(--green);
-      transform: translate(-4px, -4px);
+      box-shadow: 0 0 18px rgba(77, 229, 255, 0.2);
+      transform: translateY(-2px);
     }
     &:after {
       display: none !important;
@@ -110,9 +112,9 @@ const mixins = {
   `,
 
   bigButton: css`
-    color: var(--green);
-    background-color: transparent;
-    border: 1px solid var(--green);
+    color: var(--white);
+    background: rgba(77, 229, 255, 0.12);
+    border: 1px solid rgba(77, 229, 255, 0.5);
     border-radius: var(--border-radius);
     padding: 1.25rem 1.75rem;
     font-size: var(--fz-sm);
@@ -124,8 +126,8 @@ const mixins = {
     &:hover,
     &:focus-visible {
       outline: none;
-      box-shadow: 4px 4px 0 0 var(--green);
-      transform: translate(-5px, -5px);
+      box-shadow: 0 0 24px rgba(77, 229, 255, 0.22);
+      transform: translateY(-3px);
     }
     &:after {
       display: none !important;
@@ -133,12 +135,12 @@ const mixins = {
   `,
 
   boxShadow: css`
-    box-shadow: 0 10px 30px -15px var(--navy-shadow);
+    box-shadow: 0 14px 40px -18px var(--navy-shadow);
     transition: var(--transition);
 
     &:hover,
     &:focus-visible {
-      box-shadow: 0 20px 30px -15px var(--navy-shadow);
+      box-shadow: 0 20px 50px -18px var(--navy-shadow);
     }
   `,
 

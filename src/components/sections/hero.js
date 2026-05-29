@@ -17,32 +17,79 @@ const StyledHeroSection = styled.section`
     padding-top: var(--nav-height);
   }
 
-  h1 {
-    margin: 0 0 30px 4px;
-    color: var(--green);
+  .hero-intro {
+    margin: 0 0 20px 4px;
+    color: var(--cyan);
     font-family: var(--font-mono);
-    font-size: clamp(var(--fz-sm), 5vw, var(--fz-md));
-    font-weight: 400;
+    font-size: clamp(var(--fz-sm), 4vw, var(--fz-md));
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 
     @media (max-width: 480px) {
-      margin: 0 0 20px 2px;
+      margin-left: 2px;
     }
   }
 
-  h3 {
-    margin-top: 5px;
-    color: var(--slate);
+  h1,
+  h2 {
+    margin: 0;
+    color: var(--white);
     line-height: 0.9;
   }
 
-  p {
-    margin: 20px 0 0;
-    max-width: 540px;
+  .big-heading {
+    font-size: clamp(52px, 8vw, 96px);
+    letter-spacing: -0.05em;
+    max-width: 820px;
   }
 
-  .email-link {
-    ${({ theme }) => theme.mixins.bigButton};
-    margin-top: 50px;
+  h3 {
+    margin-top: 20px;
+    max-width: 720px;
+    color: var(--slate);
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.2;
+  }
+
+  p {
+    margin: 30px 0 0;
+    max-width: 680px;
+    color: var(--light-slate);
+    font-size: var(--fz-lg);
+    line-height: 1.8;
+  }
+
+  .hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 40px;
+  }
+
+  .hero-button {
+    ${({ theme }) => theme.mixins.button};
+    min-width: 140px;
+    padding: 1rem 1.5rem;
+    border-radius: 999px;
+    font-size: var(--fz-sm);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: rgba(77, 229, 255, 0.16);
+    border: 1px solid rgba(77, 229, 255, 0.32);
+    box-shadow: 0 0 28px rgba(77, 229, 255, 0.08);
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(77, 229, 255, 0.22);
+      transform: translateY(-2px);
+      box-shadow: 0 0 32px rgba(77, 229, 255, 0.22);
+    }
+  }
+
+  .hero-button.secondary {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
   }
 `;
 
@@ -59,30 +106,52 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const one = <h1>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Brittany Chiang.</h2>;
-  const three = <h3 className="big-heading">I build things for the web.</h3>;
+  const one = <p className="hero-intro">AI Engineer · Agentic AI Automation · Computer Vision</p>;
+  const two = (
+    <h1 className="big-heading" style={{ color: '#4de5ff' }}>
+      Malaika Saleem.
+    </h1>
+  );
+  const three = (
+    <h2 className="big-heading">
+      I build intelligent systems that blend vision, language, and automation for real-world impact.
+    </h2>
+  );
   const four = (
-    <>
-      <p>
-        I’m a software engineer specializing in building (and occasionally designing) exceptional
-        digital experiences. Currently, I’m focused on building accessible, human-centered products
-        at{' '}
-        <a href="https://upstatement.com/" target="_blank" rel="noreferrer">
-          Upstatement
-        </a>
-        .
-      </p>
-    </>
+    <p>
+      I am a Gold Medalist Artificial Intelligence undergraduate with a CGPA of 3.5 and a strong
+      passion for developing intelligent systems that solve real-world problems. Throughout my
+      academic journey, I have gained hands-on experience in machine learning, deep learning,
+      computer vision, and natural language processing by working on various AI-based projects and
+      applications. I enjoy transforming ideas into practical solutions and continuously exploring
+      new technologies to enhance my skills. Along with my technical background, I value teamwork,
+      creativity, and problem-solving, and I strive to build impactful and user-focused AI solutions
+      that can make everyday tasks smarter and more efficient.
+    </p>
   );
   const five = (
-    <a
-      className="email-link"
-      href="https://www.newline.co/courses/build-a-spotify-connected-app"
-      target="_blank"
-      rel="noreferrer">
-      Check out my course!
-    </a>
+    <div className="hero-buttons">
+      <a className="hero-button" href="#projects">
+        View Projects
+      </a>
+      <a className="hero-button secondary" href="/resume.pdf" target="_blank" rel="noreferrer">
+        Resume
+      </a>
+      <a
+        className="hero-button secondary"
+        href="https://github.com/Malaika-Saleem"
+        target="_blank"
+        rel="noreferrer">
+        GitHub
+      </a>
+      <a
+        className="hero-button secondary"
+        href="https://www.linkedin.com/in/malaika-saleem-07805127b/"
+        target="_blank"
+        rel="noreferrer">
+        LinkedIn
+      </a>
+    </div>
   );
 
   const items = [one, two, three, four, five];

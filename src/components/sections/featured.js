@@ -126,6 +126,9 @@ const StyledProject = styled.li`
   .project-title {
     color: var(--lightest-slate);
     font-size: clamp(24px, 5vw, 28px);
+    word-break: break-word;
+    white-space: normal;
+    max-width: 100%;
 
     @media (min-width: 768px) {
       margin: 0 0 20px;
@@ -135,7 +138,9 @@ const StyledProject = styled.li`
       color: var(--white);
 
       a {
+        display: inline-block;
         position: static;
+        white-space: normal;
 
         &:before {
           content: '';
@@ -288,6 +293,25 @@ const StyledProject = styled.li`
       }
     }
 
+    .project-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      min-height: 300px;
+      color: var(--white);
+      font-family: var(--font-mono);
+      font-size: var(--fz-sm);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: linear-gradient(180deg, rgba(10, 25, 47, 0.96), rgba(10, 25, 47, 0.88));
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(77, 229, 255, 0.2);
+      padding: 30px;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(77, 229, 255, 0.04);
+    }
+
     .img {
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
@@ -307,18 +331,16 @@ const Featured = () => {
   const data = useStaticQuery(graphql`
     {
       featured: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/content/featured/" } }
-        sort: { fields: [frontmatter___date], order: ASC }
+        filter: {
+          fileAbsolutePath: { regex: "/content/featured/" }
+          frontmatter: { showInFeatured: { eq: true } }
+        }
+        sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
           node {
             frontmatter {
               title
-              cover {
-                childImageSharp {
-                  gatsbyImageData(width: 700, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
-                }
-              }
               tech
               github
               external
@@ -356,16 +378,16 @@ const Featured = () => {
           featuredProjects.map(({ node }, i) => {
             const { frontmatter, html } = node;
             const { external, title, tech, github, cover, cta } = frontmatter;
-            const image = getImage(cover);
+            const image = cover ? getImage(cover) : null;
 
             return (
               <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
                 <div className="project-content">
                   <div>
-                    <p className="project-overline">Featured Project</p>
+                    <p className="project-overline">Featured AI System</p>
 
                     <h3 className="project-title">
-                      <a href={external}>{title}</a>
+                      <a href={external || github || '#'}>{title}</a>
                     </h3>
 
                     <div
@@ -373,7 +395,7 @@ const Featured = () => {
                       dangerouslySetInnerHTML={{ __html: html }}
                     />
 
-                    {tech.length && (
+                    {tech && tech.length > 0 && (
                       <ul className="project-tech-list">
                         {tech.map((tech, i) => (
                           <li key={i}>{tech}</li>
@@ -383,7 +405,7 @@ const Featured = () => {
 
                     <div className="project-links">
                       {cta && (
-                        <a href={cta} aria-label="Course Link" className="cta">
+                        <a href={cta} aria-label="Learn More" className="cta">
                           Learn More
                         </a>
                       )}
@@ -403,7 +425,13 @@ const Featured = () => {
 
                 <div className="project-image">
                   <a href={external ? external : github ? github : '#'}>
-                    <GatsbyImage image={image} alt={title} className="img" />
+                    {image ? (
+                      <GatsbyImage image={image} alt={title} className="img" />
+                    ) : (
+                      <div className="project-placeholder">
+                        <span>AI Project Preview</span>
+                      </div>
+                    )}
                   </a>
                 </div>
               </StyledProject>

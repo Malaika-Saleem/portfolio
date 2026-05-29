@@ -21,36 +21,25 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::selection {
-    background-color: var(--lightest-navy);
-    color: var(--lightest-slate);
+    background-color: rgba(77, 229, 255, 0.2);
+    color: var(--white);
   }
 
-  /* Provide basic, default focus styles.*/
   :focus {
     outline: 2px dashed var(--green);
-    outline-offset: 3px;
+    outline-offset: 4px;
   }
 
-  /*
-    Remove default focus styles for mouse users ONLY if
-    :focus-visible is supported on this platform.
-  */
   :focus:not(:focus-visible) {
     outline: none;
     outline-offset: 0px;
   }
 
-  /*
-    Optionally: If :focus-visible is supported on this
-    platform, provide enhanced focus styles for keyboard
-    focus.
-  */
   :focus-visible {
     outline: 2px dashed var(--green);
-    outline-offset: 3px;
+    outline-offset: 4px;
   }
 
-  /* Scrollbar Styles */
   html {
     scrollbar-width: thin;
     scrollbar-color: var(--dark-slate) var(--navy);
@@ -74,11 +63,16 @@ const GlobalStyle = createGlobalStyle`
     overflow-x: hidden;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    background-color: var(--navy);
-    color: var(--slate);
+    background-color: var(--dark-navy);
+    background-image:
+      radial-gradient(circle at 20% 10%, rgba(77, 229, 255, 0.16), transparent 18%),
+      radial-gradient(circle at 85% 5%, rgba(183, 113, 246, 0.12), transparent 16%),
+      linear-gradient(180deg, var(--dark-navy) 0%, var(--navy) 100%);
+    background-attachment: fixed;
+    color: var(--lightest-slate);
     font-family: var(--font-sans);
     font-size: var(--fz-xl);
-    line-height: 1.3;
+    line-height: 1.4;
 
     @media (max-width: 480px) {
       font-size: var(--fz-lg);
@@ -96,11 +90,36 @@ const GlobalStyle = createGlobalStyle`
       }
 
       #content > * {
-        filter: blur(5px) brightness(0.7);
+        filter: blur(5px) brightness(0.75);
         transition: var(--transition);
         pointer-events: none;
         user-select: none;
       }
+    }
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 15% 20%, rgba(77, 229, 255, 0.12), transparent 22%),
+      radial-gradient(circle at 85% 20%, rgba(183, 113, 246, 0.12), transparent 18%),
+      radial-gradient(circle at 50% 85%, rgba(77, 229, 255, 0.08), transparent 18%);
+    mix-blend-mode: screen;
+    z-index: -1;
+    animation: pulse 16s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.02);
     }
   }
 
@@ -116,29 +135,29 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
     max-width: 1600px;
     min-height: 100vh;
-    padding: 200px 150px;
+    padding: 180px 140px;
 
     @media (max-width: 1080px) {
-      padding: 200px 100px;
+      padding: 160px 90px;
     }
     @media (max-width: 768px) {
-      padding: 150px 50px;
+      padding: 120px 40px;
     }
     @media (max-width: 480px) {
-      padding: 125px 25px;
+      padding: 100px 20px;
     }
 
     &.fillHeight {
-      padding: 0 150px;
+      padding: 0 140px;
 
       @media (max-width: 1080px) {
-        padding: 0 100px;
+        padding: 0 90px;
       }
       @media (max-width: 768px) {
-        padding: 0 50px;
+        padding: 0 40px;
       }
       @media (max-width: 480px) {
-        padding: 0 25px;
+        padding: 0 20px;
       }
     }
   }
@@ -171,12 +190,12 @@ const GlobalStyle = createGlobalStyle`
 
   .big-heading {
     margin: 0;
-    font-size: clamp(40px, 8vw, 80px);
+    font-size: clamp(42px, 8vw, 92px);
   }
 
   .medium-heading {
     margin: 0;
-    font-size: clamp(40px, 8vw, 60px);
+    font-size: clamp(40px, 5vw, 68px);
   }
 
   .numbered-heading {
@@ -210,13 +229,13 @@ const GlobalStyle = createGlobalStyle`
       display: block;
       position: relative;
       top: -5px;
-      width: 300px;
+      width: 280px;
       height: 1px;
       margin-left: 20px;
-      background-color: var(--lightest-navy);
+      background-color: rgba(77, 229, 255, 0.18);
 
       @media (max-width: 1080px) {
-        width: 200px;
+        width: 180px;
       }
       @media (max-width: 768px) {
         width: 100%;
@@ -291,7 +310,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
-    margin: 0 0 15px 0;
+    margin: 0 0 18px 0;
 
     &:last-child,
     &:last-of-type {
@@ -398,7 +417,7 @@ const GlobalStyle = createGlobalStyle`
 
   .subtitle {
     color: var(--green);
-    margin: 0 0 20px 0;
+    margin: 0 0 24px 0;
     font-size: var(--fz-md);
     font-family: var(--font-mono);
     font-weight: 400;

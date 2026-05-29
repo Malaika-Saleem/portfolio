@@ -6,51 +6,71 @@ import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledAboutSection = styled.section`
-  max-width: 900px;
+  max-width: 1000px;
 
   .inner {
     display: grid;
     grid-template-columns: 3fr 2fr;
-    grid-gap: 50px;
+    grid-gap: 60px;
+    align-items: start;
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       display: block;
     }
   }
 `;
 const StyledText = styled.div`
+  p {
+    color: var(--light-slate);
+    font-size: var(--fz-lg);
+    line-height: 1.85;
+  }
+
   ul.skills-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
-    grid-gap: 0 10px;
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+    grid-gap: 12px;
     padding: 0;
-    margin: 20px 0 0 0;
-    overflow: hidden;
+    margin: 30px 0 0 0;
     list-style: none;
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, minmax(140px, 1fr));
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
 
     li {
       position: relative;
-      margin-bottom: 10px;
-      padding-left: 20px;
+      padding: 18px 20px;
+      border-radius: var(--border-radius);
+      background: rgba(77, 229, 255, 0.08);
+      border: 1px solid rgba(77, 229, 255, 0.12);
+      color: var(--white);
       font-family: var(--font-mono);
       font-size: var(--fz-xs);
+      font-weight: 500;
+      transition: var(--transition);
+
+      &:hover {
+        background: rgba(77, 229, 255, 0.16);
+        transform: translateY(-2px);
+      }
 
       &:before {
-        content: '▹';
-        position: absolute;
-        left: 0;
-        color: var(--green);
-        font-size: var(--fz-sm);
-        line-height: 12px;
+        content: '';
       }
     }
   }
 `;
 const StyledPic = styled.div`
   position: relative;
-  max-width: 300px;
+  max-width: 360px;
+  margin: 0 auto;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     margin: 50px auto 0;
     width: 70%;
   }
@@ -60,16 +80,18 @@ const StyledPic = styled.div`
     display: block;
     position: relative;
     width: 100%;
-    border-radius: var(--border-radius);
-    background-color: var(--green);
+    border-radius: calc(var(--border-radius) * 1.25);
+    background: linear-gradient(180deg, rgba(77, 229, 255, 0.08), rgba(173, 101, 255, 0.1));
+    overflow: hidden;
+    border: 1px solid rgba(77, 229, 255, 0.18);
 
     &:hover,
     &:focus {
       outline: 0;
-      transform: translate(-4px, -4px);
+      transform: translate(-6px, -6px);
 
       &:after {
-        transform: translate(8px, 8px);
+        transform: translate(10px, 10px);
       }
 
       .img {
@@ -80,9 +102,9 @@ const StyledPic = styled.div`
 
     .img {
       position: relative;
-      border-radius: var(--border-radius);
+      border-radius: calc(var(--border-radius) * 1.25);
       mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1);
+      filter: grayscale(80%) contrast(1.05) brightness(0.92);
       transition: var(--transition);
     }
 
@@ -93,21 +115,21 @@ const StyledPic = styled.div`
       position: absolute;
       width: 100%;
       height: 100%;
-      border-radius: var(--border-radius);
+      border-radius: calc(var(--border-radius) * 1.25);
       transition: var(--transition);
     }
 
     &:before {
       top: 0;
       left: 0;
-      background-color: var(--navy);
+      background: radial-gradient(circle at top left, rgba(77, 229, 255, 0.18), transparent 22%);
       mix-blend-mode: screen;
     }
 
     &:after {
-      border: 2px solid var(--green);
-      top: 14px;
-      left: 14px;
+      border: 2px solid rgba(77, 229, 255, 0.3);
+      top: 16px;
+      left: 16px;
       z-index: -1;
     }
   }
@@ -125,7 +147,26 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Eleventy', 'Node.js', 'WordPress'];
+  const skills = [
+    'Python',
+    'PyTorch',
+    'TensorFlow',
+    'Computer Vision',
+    'NLP',
+    'LangChain',
+    'LlamaIndex',
+    'Agentic AI',
+    'Vision-Language Models',
+    'RAG',
+    'Generative AI',
+    'GANs',
+    'n8n',
+    'Flask',
+    'Node.js',
+    'SQL',
+    'AI Automation',
+    'Multi-Agent Systems',
+  ];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -135,33 +176,25 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Brittany and I enjoy creating things that live on the internet. My
-              interest in web development started back in 2012 when I decided to try editing custom
-              Tumblr themes — turns out hacking together a custom reblog button taught me a lot
-              about HTML &amp; CSS!
+              Hi! I'm Malaika Saleem, a Gold Medalist Artificial Intelligence undergraduate with a
+              CGPA of 3.5 and a strong passion for developing intelligent systems that solve
+              real-world problems. Throughout my academic journey, I have gained hands-on experience
+              in machine learning, deep learning, computer vision, and natural language processing
+              by working on various AI-based projects and applications.
             </p>
 
             <p>
-              Fast-forward to today, and I’ve had the privilege of working at{' '}
-              <a href="https://us.mullenlowe.com/">an advertising agency</a>,{' '}
-              <a href="https://starry.com/">a start-up</a>,{' '}
-              <a href="https://www.apple.com/">a huge corporation</a>, and{' '}
-              <a href="https://scout.camd.northeastern.edu/">a student-led design studio</a>. My
-              main focus these days is building accessible, inclusive products and digital
-              experiences at <a href="https://upstatement.com/">Upstatement</a> for a variety of
-              clients.
+              I enjoy transforming ideas into practical solutions and continuously exploring new
+              technologies to enhance my skills. Along with my technical background, I value
+              teamwork, creativity, and problem-solving, and I strive to build impactful and
+              user-focused AI solutions that can make everyday tasks smarter and more efficient.
             </p>
 
             <p>
-              I also recently{' '}
-              <a href="https://www.newline.co/courses/build-a-spotify-connected-app">
-                launched a course
-              </a>{' '}
-              that covers everything you need to build a web app with the Spotify API using Node
-              &amp; React.
+              I’m passionate about building generative AI, multi-agent systems, and automation
+              pipelines that empower teams, accelerate insights, and create safer, more efficient
+              environments.
             </p>
-
-            <p>Here are a few technologies I’ve been working with recently:</p>
           </div>
 
           <ul className="skills-list">
@@ -177,7 +210,7 @@ const About = () => {
               width={500}
               quality={95}
               formats={['AUTO', 'WEBP', 'AVIF']}
-              alt="Headshot"
+              alt="Malaika Saleem"
             />
           </div>
         </StyledPic>

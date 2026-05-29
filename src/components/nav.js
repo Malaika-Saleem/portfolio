@@ -85,12 +85,18 @@ const StyledNav = styled.nav`
       .logo-container {
         position: relative;
         z-index: 1;
-        svg {
-          fill: none;
+        svg,
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
           user-select: none;
           @media (prefers-reduced-motion: no-preference) {
             transition: var(--transition);
           }
+        }
+        svg {
+          fill: none;
           polygon {
             fill: var(--navy);
           }

@@ -171,7 +171,7 @@ const Projects = () => {
       projects: allMarkdownRemark(
         filter: {
           fileAbsolutePath: { regex: "/content/projects/" }
-          frontmatter: { showInProjects: { ne: false } }
+          frontmatter: { showInProjects: { eq: true } }
         }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
@@ -182,6 +182,7 @@ const Projects = () => {
               tech
               github
               external
+              showOnMore
             }
             html
           }
@@ -208,7 +209,7 @@ const Projects = () => {
 
   const GRID_LIMIT = 6;
   const projects = data.projects.edges.filter(({ node }) => node);
-  const firstSix = projects.slice(0, GRID_LIMIT);
+  const firstSix = projects.slice(0, GRID_LIMIT).filter(({ node }) => !node.frontmatter.showOnMore);
   const projectsToShow = showMore ? projects : firstSix;
 
   const projectInner = node => {
